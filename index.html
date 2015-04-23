@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-routes/jquery.routes.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
+    <script>
+        var global = this;
+        $.routes.add('/t{theme:int}/l{lifeExpanded:int}/i{issueExpanded:int}', function () {
+            if (this.theme === undefined || this.theme >= 6 || this.theme < 0) {
+                global.theme = 0;
+            }else{
+                global.theme = this.theme
+            }
+            if (this.lifeExpanded === undefined) {
+                global.lifeExpanded = false;
+            } else {
+                global.lifeExpanded = Boolean(this.lifeExpanded);
+            }
+            if (this.issueExpanded === undefined) {
+                global.issueExpanded = false;
+            } else {
+                global.issueExpanded = Boolean(this.issueExpanded);
+            }
+
+            $('#theme').remove();
+            $('head').append($('<link id="theme" rel="stylesheet" type="text/css" />').attr('href', 'css/style' + global.theme + '.css'));
+        });
+        if (global.theme === undefined || global.theme >= 6 || global.theme < 0) {
+            global.theme = 0;
+        }
+        $('head').append($('<link id="theme" rel="stylesheet" type="text/css" />').attr('href', 'css/style' + global.theme + '.css'));
+
+    </script>
+    <title>Urban Life Tracker</title>
+    <style type="text/css">
+
+        #map {
+            width: 100%;
+            height: 250px;
+            margin: 0;
+            padding: 0;
+            border-radius: 5px;
+        }
+
+        .stations, .stations svg {
+            position: absolute;
+        }
+
+        .stations svg {
+            width: 60px;
+            height: 20px;
+            padding-right: 100px;
+            font: 10px sans-serif;
+        }
+
+        .stations circle {
+            fill: brown;
+            stroke: black;
+            stroke-width: 1.5px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="top" id="top"></div>
+<div class="theme-chooser">
+    <div class="theme-chooser-inner">
+        <div class="theme-block" index="0" style="background-color: #00ADEF"></div>
+        <div class="theme-block" index="1" style="background-color:#AA3939"></div>
+        <div class="theme-block" index="2" style="background-color: #609732"></div>
+        <div class="theme-block" index="3" style="background-color: #AAA639"></div>
+        <div class="theme-block" index="4" style="background-color: #582A72"></div>
+        <div class="theme-block" index="5" style="background-color: #d0d0d0"></div>
+    </div>
+</div>
+
+<h1 class="title">Urban Life Tracker</h1>
+
+<h2 class="subtitle">A Real-Time Urban Life Sensor For Greater Pittsburgh Area</h2>
+
+<div class="nav">
+    <ul>
+        <li class="left">
+            <a class="link-icon" href="#life">
+                <i class="fa fa-heartbeat"></i>
+
+                <p>Life satisfaction</p>
+            </a>
+        </li>
+        <li class="left">
+            <a class="link-icon" href="#issue">
+                <i class="fa fa-comments"></i>
+
+                <p class="icon-text-alt">Social issue</p>
+            </a>
+        </li>
+        <!--<li class="left">-->
+        <!--<a class="link-icon" href="#">-->
+        <!--<i class="fa fa-users"></i>-->
+
+        <!--<p class="icon-text-alt">Citizen action</p>-->
+        <!--</a>-->
+        <!--</li>-->
+        <li class="left">
+            <a class="link-icon" href="#about">
+                <i class="fa fa-info-circle"></i>
+
+                <p class="icon-text-alt">About</p>
+            </a>
+        </li>
+        <li class="right">
+            <a class="link-icon" href="#issue">
+                <i class="fa fa-print"></i>
+
+                <p class="icon-text-alt">Print Current</p>
+            </a>
+        </li>
+        <li class="right">
+            <a class="link-icon" href="#">
+                <i class="fa fa-share-alt"></i>
+
+                <p class="icon-text-alt">Share Current</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div id="navVertical" class="nav-vertical">
+    <ul>
+        <li class="left">
+            <a class="link-icon-vertical" href="#top">
+                <i class="fa fa-chevron-up"></i>
+
+                <p>Go to Top</p>
+            </a>
+        </li>
+        <li class="left">
+            <a class="link-icon-vertical" href="#life">
+                <i class="fa fa-heartbeat"></i>
+
+                <p>Life satisfaction</p>
+            </a>
+        </li>
+        <li class="left">
+            <a class="link-icon-vertical" href="#issue">
+                <i class="fa fa-comments"></i>
+
+                <p class="icon-text-alt">Social issue</p>
+            </a>
+        </li>
+        <!--<li class="left">-->
+        <!--<a class="link-icon" href="#">-->
+        <!--<i class="fa fa-users"></i>-->
+
+        <!--<p class="icon-text-alt">Citizen action</p>-->
+        <!--</a>-->
+        <!--</li>-->
+        <li class="left">
+            <a class="link-icon-vertical" href="#about">
+                <i class="fa fa-info-circle"></i>
+
+                <p class="icon-text-alt">About</p>
+            </a>
+        </li>
+        <li class="right">
+            <a class="link-icon-vertical" href="#">
+                <i class="fa fa-print"></i>
+
+                <p class="icon-text-alt">Print Current</p>
+            </a>
+        </li>
+        <li class="right">
+            <a class="link-icon-vertical" href="#">
+                <i class="fa fa-share-alt"></i>
+
+                <p class="icon-text-alt">Share Current</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="container" id="life">
+    <div class="header"><i class="fa fa-heartbeat"></i><span>Life satisfaction & happiness</span><i
+            class="fa fa-expand top-right-icon"></i><i class="fa fa-compress top-right-icon"></i></div>
+    <div class="content-expanded">
+        <div class="container-expanded-left">
+            <div id="map"></div>
+            Preference
+        </div>
+        <div class="container-expanded-right">
+            Twitter module
+            Share / Comment / Print the Section
+        </div>
+    </div>
+    <div class="content-compressed">
+        <div class="container-compressed">
+            compressed view
+        </div>
+    </div>
+</div>
+
+<div class="container" id="issue">
+    <div class="header"><i class="fa fa-comments"></i><span>Social issue</span><i class="fa fa-expand top-right-icon"></i><i
+            class="fa fa-compress top-right-icon"></i></div>
+    <div class="content-expanded">
+        <div class="container-expanded-left">
+            Hello world
+        </div>
+        <div class="container-expanded-right">
+            Hello world
+        </div>
+    </div>
+    <div class="content-compressed">
+        <div class="container-compressed">
+            Compressed view
+        </div>
+    </div>
+</div>
+
+<div class="container" id="about">
+    <div class="header"><i class="fa fa-info-circle"></i><span>About</span></div>
+    <div class="container-expanded-full">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa delectus doloremque excepturi ipsum minus modi numquam odio
+            odit officia omnis, praesentium saepe, sapiente. Ab ducimus nemo nostrum ratione velit voluptas.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi beatae consequatur culpa cum deleniti earum eligendi,
+            error est eveniet facilis impedit ipsam nemo nulla odit pariatur, provident sequi sit.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequuntur debitis dignissimos est exercitationem
+            facere incidunt iste itaque, nam natus nihil officiis optio porro quis repudiandae saepe tempore ullam?</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam debitis dolores dolorum eius illum inventore itaque
+            nostrum quasi reiciendis, rem repellendus repudiandae totam voluptatum. Animi enim eos explicabo in officiis!</p>
+    </div>
+</div>
+|
+<script src="my.js"></script>
+<script type="text/javascript">
+    var rgb2hex = function (rgb) {
+        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    };
+    var hex = function(x) {
+        return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+    };
+    var hexDigits = new Array
+    ("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
+
+    var map;
+    var brooklyn = new google.maps.LatLng(40.4450813, -80.0087746);
+
+    var MY_MAPTYPE_ID = 'custom_style';
+
+    function initialize() {
+
+        var featureOpts =[
+            {
+                "stylers": [
+                    { "visibility": "on" },
+                    { "hue": rgb2hex($(".header").css("background-color")) }
+                ]
+            },{
+                "featureType": "road",
+                "stylers": [
+                    { "visibility": "off" }
+                ]
+            },{
+                "featureType": "poi",
+                "elementType": "labels.icon",
+                "stylers": [
+                    { "visibility": "off" }
+                ]
+            }
+        ];
+
+        var mapOptions = {
+            zoom: 9,
+            center: brooklyn,
+            mapTypeControlOptions: {
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+            },
+            mapTypeId: MY_MAPTYPE_ID,
+            panControl: true,
+            zoomControl: true,
+            streetViewControl: false,
+            overviewMapControl: false,
+            mapTypeControl: false
+        };
+
+        map = new google.maps.Map(document.getElementById('map'),
+                mapOptions);
+
+        var styledMapOptions = {
+            name: 'Custom Style'
+        };
+
+        var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+        map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</body>
+</html>

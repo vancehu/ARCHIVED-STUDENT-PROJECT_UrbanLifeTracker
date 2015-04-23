@@ -1,0 +1,21 @@
+{
+  "name": "jquery-routes",
+  "description": "jQuery component",
+  "keywords": [
+    "jquery",
+    "component"
+  ],
+  "main": "jquery.routes.js",
+  "license": "MIT",
+  "homepage": "https://github.com/laruche/jquery-routes",
+  "_release": "3c7c6b2599",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3c7c6b259953281a774684e9e5a643c9060c6dc9"
+  },
+  "_source": "git://github.com/laruche/jquery-routes.git",
+  "_target": "*",
+  "_originalSource": "jquery-routes",
+  "_direct": true
+}

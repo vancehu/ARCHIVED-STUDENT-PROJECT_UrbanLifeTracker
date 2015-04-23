@@ -1,0 +1,34 @@
+$color-alt: #808284;
+$color-fill: #FFF7F7;
+$color-bg: #FFBDBD;
+$color-border: #AA3939;
+$color-highlight: #390202;
+$color-main: #040000;
+$color-positive: #18bb2f;
+$color-negative: #D91B5B;
+
+@font-face {
+  font-family: "Garamond";
+  src: url("../res/font/GARA.TTF")
+}
+
+@font-face {
+  font-family: "Garamond";
+  src: url("../res/font/GARABD.TTF");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Myriad Pro";
+  src: url("../res/font/MyriadPro-Regular.otf")
+}
+
+@font-face {
+  font-family: "Myriad Pro";
+  src: url("../res/font/MyriadPro-Bold.otf");
+  font-weight: bold;
+}
+$font-title: "Garamond", Geogria, "Times New Roman", serif;
+$font-text: "Myriad Pro", Helvetica, Arial, sans-serif;
+
+$list-icon: "about", "chat", "collapse", "expand", "heart", "people", "printer", "reply", "sad", "share", "smile", "tag", "zoomin", "zoomout";

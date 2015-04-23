@@ -1,0 +1,11 @@
+{
+  "name": "jquery-routes",
+  "version": "0.1",
+  "description": "jQuery component",
+  "keywords": [
+    "jquery",
+    "component"
+  ],
+  "main": "jquery.routes.js",
+  "license": "MIT"
+}

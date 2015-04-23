@@ -1,0 +1,181 @@
+@font-face {
+  font-family: "Garamond";
+  src: url("../res/font/GARA.TTF"); }
+@font-face {
+  font-family: "Garamond";
+  src: url("../res/font/GARABD.TTF");
+  font-weight: bold; }
+@font-face {
+  font-family: "Myriad Pro";
+  src: url("../res/font/MyriadPro-Regular.otf"); }
+@font-face {
+  font-family: "Myriad Pro";
+  src: url("../res/font/MyriadPro-Bold.otf");
+  font-weight: bold; }
+body {
+  background-color: #f6f6f6; }
+
+.top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px; }
+
+.title {
+  font-family: "Garamond", Geogria, "Times New Roman", serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 10px; }
+
+.theme-chooser {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  background-color: #d0d0d0;
+  border: 2px solid #FFFFFF; }
+  .theme-chooser .theme-chooser-inner {
+    display: none;
+    width: 140px;
+    height: 20px;
+    background-color: white;
+    position: fixed;
+    right: 5px;
+    top: 20px;
+    padding: 10px; }
+    .theme-chooser .theme-chooser-inner .theme-block {
+      height: 20px;
+      width: 20px;
+      display: inline-block; }
+      .theme-chooser .theme-chooser-inner .theme-block:hover {
+        box-sizing: border-box;
+        border: solid lightgray 3px; }
+  .theme-chooser:hover .theme-chooser-inner {
+    display: block; }
+
+.subtitle {
+  font-family: "Garamond", Geogria, "Times New Roman", serif;
+  text-align: center;
+  font-size: 1.2em;
+  color: #808284; }
+
+.nav {
+  margin: 20px auto 20px auto;
+  width: 60%;
+  max-width: 800px;
+  min-width: 600px;
+  overflow-y: auto; }
+  .nav ul {
+    padding-left: 0;
+    display: block;
+    list-style-type: none; }
+    .nav ul li {
+      display: inline-block;
+      width: 15%; }
+    .nav ul .left {
+      float: left; }
+    .nav ul .right {
+      float: right; }
+
+.link-icon {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: #808284; }
+  .link-icon:hover {
+    color: #190326; }
+  .link-icon i {
+    font-size: 4em; }
+  .link-icon p {
+    font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+    font-size: 1em; }
+
+.nav-vertical {
+  position: fixed;
+  display: none;
+  left: 20px;
+  top: 35%; }
+  .nav-vertical ul {
+    padding-left: 0;
+    display: block; }
+    .nav-vertical ul li {
+      display: block;
+      width: 45%; }
+
+.link-icon-vertical {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: #808284;
+  margin-bottom: 5px; }
+  .link-icon-vertical:hover {
+    color: #190326; }
+  .link-icon-vertical i {
+    font-size: 1.5em; }
+  .link-icon-vertical p {
+    position: absolute;
+    top: -12px;
+    left: 30px;
+    font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    min-width: 500px;
+    display: none; }
+  .link-icon-vertical:hover p {
+    display: block; }
+
+.container {
+  width: 65%;
+  max-width: 850px;
+  min-width: 650px;
+  margin: 10px auto 50px auto;
+  border: solid 2px #d0d0d0;
+  border-radius: 25px;
+  background-color: #FFFFFF;
+  position: relative;
+  overflow: auto;
+  font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+  line-height: 2em; }
+  .container .header {
+    background-color: #d0d0d0;
+    border-radius: 10px 10px 0 0;
+    color: #FFFFFF;
+    font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 5px; }
+    .container .header span {
+      display: inline-block;
+      margin: 5px; }
+    .container .header .top-right-icon {
+      position: absolute;
+      cursor: pointer;
+      top: 10px;
+      right: 10px; }
+
+.container-expanded-full, .container-expanded-left, .container-expanded-right {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 400px;
+  padding: 20px; }
+
+.container-compressed {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 200px;
+  padding: 20px; }
+
+.container-expanded-left {
+  border-right: solid lightgray 1px;
+  float: left;
+  width: 50%; }
+
+.container-expanded-right {
+  border-left: solid lightgray 1px;
+  float: right;
+  width: 50%; }
+
+/*# sourceMappingURL=style5.css.map */
